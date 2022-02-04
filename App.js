@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import * as React from 'react';
+import { BlurView } from 'expo-blur';
+import ViewImage from './components/1'
+import DataFetch from './components/dataFetch';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <DataFetch/>
     </View>
   );
 }
@@ -13,8 +16,20 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    color: '#000',
   },
+  image:{
+    resizeMode: 'contain',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+  image_1:{
+    width: '100%',
+    height: '100%' 
+  },
+  blurContainer:{
+    flex: 1,
+    padding: 0,
+    justifyContent: 'center',
+  }
 });
