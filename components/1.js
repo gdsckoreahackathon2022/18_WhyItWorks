@@ -1,24 +1,25 @@
-import { View, StyleSheet, Text, ScrollView, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
 import * as React from 'react';
-import { BlurView } from 'expo-blur';
 
-// import GestureRecognizer from 'react-native-swipe-gestures';
 
 import {fbaseFirestore} from '../firebaseSettings'
 import {fbaseStorage} from '../firebaseSettings'
 
 background_image = 'https://reactnative.dev/img/tiny_logo.png'
 
-export default function ViewImage() {
+export default function ViewImage({route}) {
+  const { img } = route.params;
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      {/* <TouchableOpacity onPress={() => navigation.goBack()}> */}
       <Image
         style={ styles.image }
         source={{
-        uri: 'https://reactnative.dev/img/tiny_logo.png',
+        uri: img,
         }}
       />
-    </ScrollView>
+      {/* </TouchableOpacity> */}
+    </View>
   );
 }
 

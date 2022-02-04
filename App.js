@@ -1,15 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 import * as React from 'react';
-import { BlurView } from 'expo-blur';
 import ViewImage from './components/1'
 import DataFetch from './components/dataFetch';
+import { NavigationContainer } from '@react-navigation/native'; 
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack =createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <DataFetch/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='first'>
+        <Stack.Screen name='start' component={DataFetch}/>
+        <Stack.Screen name='details' component={ViewImage}/>        
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
