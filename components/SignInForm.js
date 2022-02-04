@@ -1,12 +1,11 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { Alert, Button, KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native';
 import { fbaseAuth } from '../firebaseSettings';
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const onEmailChange = (text) => {
     setEmail(text);
@@ -16,76 +15,44 @@ const SignUpForm = () => {
     setPassword(text);
   };
 
-  const onPWConfirmChange = (text) => {
-    setPasswordConfirm(text);
-  }
-
   const onSubmit = async () => {
-    if (password === passwordConfirm) {
-      try {
-        await createUserWithEmailAndPassword(fbaseAuth, email, password);
-        console.log('SignUp success');
-      } catch (error) {
-        switch (error.code) {
-          case 'auth/invalid-email':
-            Alert.alert('잘못된 이메일 주소', '이메일 주소를 확인하세요');
-            break;
-          case 'auth/email-already-in-use':
-            Alert.alert('가입된 이메일', '이미 가입된 이메일입니다');
-            break;
-          case 'auth/weak-password':
-            Alert.alert('안전하지 않은 비밀번호', '비밀번호는 6글자 이상이어야 합니다');
-            break;
-          default:
-            Alert.alert('회원가입 오류');
-        }
-      } 
-    } else {
-      Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다');
+    try {
+      await signInWithEmailAndPassword(fbaseAuth, email, password);
+      console.log('login success');
+    } catch (error) {
+      Alert.alert('로그인 오류', '올바르지 않은 이메일 또는 비밀번호');
     }
   };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.whitespace} />
-
       <View style={styles.inputWrapper}>
         <TextInput 
           onChangeText={onEmailChange} 
-          placeholder='이메일' 
+          placeholder='이메일'
           style={styles.input} 
         />
       </View>
       
-
       <View style={styles.inputWrapper}>
         <TextInput 
           onChangeText={onPWChange} 
           placeholder='비밀번호' 
           secureTextEntry={true}
-          style={styles.input} 
-        />
-      </View>
-
-      <View style={styles.inputWrapper}>
-        <TextInput 
-          onChangeText={onPWConfirmChange} 
-          placeholder='비밀번호 확인' 
-          secureTextEntry={true}
-          style={styles.input} 
+          style={styles.input}
         />
       </View>
       
-
       <View style={styles.buttonWrapper}>
         <Button 
-          title='가입하기' 
+          title='로그인' 
           onPress={onSubmit} 
           style={styles.submitButton}
           color='#ffffff'
         />
       </View>
-
+    
       <View style={styles.whitespace} />
     </KeyboardAvoidingView>
   );
@@ -122,13 +89,12 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   submitButton: {
-    
+    color: '#ffffff',
     fontSize: 20,
-    justifyContent: 'flex-end',
   },
   whitespace: {
     flex: 1,
   },
 });
 
-export default SignUpForm;
+export default SignInForm;
