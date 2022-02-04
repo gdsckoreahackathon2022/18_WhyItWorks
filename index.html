@@ -10,11 +10,29 @@
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
+			center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심 좌표 -- GPS 현위치 받기 가능?
+			level: 3 // 지도 확대 레벨
 		};
 
 		var map = new kakao.maps.Map(container, options);
+
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+			addMarker(mouseEvent.latLng);
+		});
+
+		function addMarker(position){
+			var marker = new kakao.maps.Marker({
+				position: position,
+				clickable: true
+			});
+
+			kakao.maps.event.addListener(marker, 'click', function() {
+				// 마커 위에 인포윈도우를 표시합니다
+				marker.setMap(null)
+			});
+
+			marker.setMap(map);
+	}      
 	</script>
 </body>
 </html>
