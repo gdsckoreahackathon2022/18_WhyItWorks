@@ -1,8 +1,10 @@
 import { StyleSheet, View } from 'react-native';
+import SignInOrUp from './components/SignInOrUp'
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <SignInOrUp />
     </View>
   );
 }

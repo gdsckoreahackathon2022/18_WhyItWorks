@@ -1,4 +1,4 @@
-import { Button, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 
 const SignInOrUp = () => {
   return (
@@ -6,11 +6,11 @@ const SignInOrUp = () => {
       <View style={styles.whitespace} />
 
       <View style={styles.buttonWrapper}>
-        <Button title='가입하기' style={styles.button} color='#fffff' />
+        <Button title='가입하기' style={styles.button} color='#ffffff' />
       </View>
 
       <View style={styles.buttonWrapper}>
-        <Button title='로그인' style={styles.button} color='#fffff' />
+        <Button title='로그인' style={styles.button} color='#ffffff' />
       </View>
 
       <View style={styles.whitespace} />
