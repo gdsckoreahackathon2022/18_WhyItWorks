@@ -53,7 +53,7 @@ const DataFetch = ({navigation}) => {
                 }}
                 key={i}
               >
-                <TouchableOpacity onPress={() => navigation.push('details',{img: image})}>
+                <TouchableOpacity onPress={() => navigation.push('detail',{img: image})}>
                 <Image
                   source={{ uri: image }}
                   style={[

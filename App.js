@@ -5,8 +5,14 @@ import ViewImage from './components/1'
 import DataFetch from './components/dataFetch';
 import { NavigationContainer } from '@react-navigation/native'; 
 import { createStackNavigator } from '@react-navigation/stack'; 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tab';
-import { Tab } from 'react-native-elements/dist/tab/Tab';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { Tab } from 'react-native-elements/dist/tab/Tab';
+import HomeScreen from './components/HomeScreen'
+import SignUpForm from './components/SignUpForm'
+import SignInForm from './components/SignInForm'
+import MyPage from './components/MyPage'
+import SignInOrUp from './components/SignInOrUp'
+import CameraTab from './components/CameraTab'
 const MapStack =createStackNavigator();
 const UserStack =createStackNavigator();
 const Tab =createBottomTabNavigator();
@@ -14,8 +20,8 @@ const Tab =createBottomTabNavigator();
 function MapScreen() {
   return(
       <MapStack.Navigator initialRouteName='home'>
-        <MapStack.Screen name='home' component={/*추후 추가(지도)*/}/>
-        <MapStack.Screen name='all_photo' component={DataFetch}/>
+        <MapStack.Screen name='home' component={HomeScreen}/>
+        <MapStack.Screen name='all_photo_1' component={DataFetch}/>
         <MapStack.Screen name='detail' component={ViewImage}/>        
       </MapStack.Navigator>
   )
@@ -26,8 +32,18 @@ function UserScreen() {
     <UserStack.Navigator initialRouteName='signin'>
         <UserStack.Screen name='signin' component={SignInForm}/>
         <UserStack.Screen name='signup' component={SignUpForm}/>
+        <UserStack.Screen name='signinorup' component={SignInOrUp}/>
         <UserStack.Screen name='mypage' component={MyPage}/>        
       </UserStack.Navigator>
+  )
+}
+
+function Ranking() {
+  return(
+      <MapStack.Navigator initialRouteName='all_photo'>
+        <MapStack.Screen name='all_photo' component={DataFetch}/>
+        <MapStack.Screen name='detail' component={ViewImage}/>        
+      </MapStack.Navigator>
   )
 }
 
@@ -37,8 +53,8 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name='Map' component={MapScreen}/>
         <Tab.Screen name='User' component={UserScreen}/>
-        <Tab.Screen name='Camera' component={CameraScreen}/>
-        <Tab.Screen name='Ranking' component={RankingScreen}/>
+        <Tab.Screen name='Camera' component={CameraTab}/>
+        <Tab.Screen name='photo' component={Ranking}/>
       </Tab.Navigator>
     </NavigationContainer>      
   );
